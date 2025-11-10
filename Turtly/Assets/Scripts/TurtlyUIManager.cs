@@ -33,6 +33,7 @@ public class TurtlyUIManager : MonoBehaviour
     [Header("Game Over UI")]
     public GameObject gameOverPanel;
     public TextMeshProUGUI gameOverText;
+    public Button restartButton;
 
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class TurtlyUIManager : MonoBehaviour
         if (skipButton)  skipButton.onClick.AddListener(OnSkipButtonClicked);
         if (helpButton)  helpButton.onClick.AddListener(OnHelpButtonClicked);
         if (helpCloseButton)  helpCloseButton.onClick.AddListener(HideHelpPanel);
+        if (restartButton) restartButton.onClick.AddListener(OnRestartButtonClicked);
     }
 
     #region Button Click Functions
@@ -93,6 +95,12 @@ public class TurtlyUIManager : MonoBehaviour
         ShowHelpPanel();
     }
 
+    public void OnRestartButtonClicked()
+    {
+        if (!gameManager) return;
+        gameManager.HandleRestart();
+    }
+
     #endregion
 
     #region Public methods for Game Manager
@@ -125,11 +133,29 @@ public class TurtlyUIManager : MonoBehaviour
             dialogueScrollRect.verticalNormalizedPosition = 0f; // 0 = bottom
         }
     }
+
+    public void ClearDialogue()
+    {
+        if (!dialogueContainer) return;
+
+        // Remove all elements under dialogue container
+        foreach (Transform child in dialogueContainer)
+            Destroy(child.gameObject);
+
+        // Reset scrollbar
+        if (dialogueScrollRect)
+            dialogueScrollRect.verticalNormalizedPosition = 1f; // 1 = top
+    }
     
     public void ShowGameOver(int solvedCount)
     {
         if (gameOverPanel)  gameOverPanel.SetActive(true);
         if (gameOverText)  gameOverText.text = $"Game Over\nYou have solved {solvedCount} puzzles";
+    }
+
+    public void HideGameOver()
+    {
+        if (gameOverPanel)  gameOverPanel.SetActive(false);
     }
 
     #endregion

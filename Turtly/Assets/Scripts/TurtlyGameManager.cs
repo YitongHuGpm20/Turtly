@@ -31,7 +31,7 @@ public class TurtlyGameManager : MonoBehaviour
         }
     }
 
-    #region Four Gameplay Buttons
+    #region Gameplay Buttons
 
     /// <summary> Ask Button: Ask a question </summary>
     public void HandleAsk(string questionText)
@@ -100,6 +100,30 @@ public class TurtlyGameManager : MonoBehaviour
         uiManager?.SetOpeningText($"Opening: This is No. {gameState.CurrentPuzzleIndex + 1}  puzzle");
 
         CheckBankrupt();
+    }
+
+    public void HandleRestart()
+    {
+        if (!gameConfig)
+        {
+            Debug.LogWarning("[TurtlyGameManager] No GameConfig on restart, creating a temporary one.");
+            gameConfig = ScriptableObject.CreateInstance<TurtlyGameConfig>();
+        }
+
+        // Reset Game State
+        gameState.Initialize(gameConfig.initialCoins);
+
+        // Reset UI
+        if (uiManager)
+        {
+            uiManager.ClearDialogue(); 
+            uiManager.UpdateCoins(gameState.Coins);
+            uiManager.SetOpeningText("Opening: This is No. 1 puzzle"); 
+            uiManager.HideGameOver(); 
+            uiManager.AppendDialogue("System: Game restarted!");
+        }
+
+        LogState("Game restart");
     }
 
     #endregion
