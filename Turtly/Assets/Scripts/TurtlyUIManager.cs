@@ -1,3 +1,4 @@
+using System.Xml;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,8 @@ public class TurtlyUIManager : MonoBehaviour
 
     [Header("Dialogue UI")]
     public TextMeshProUGUI openingText;
-    public TextMeshProUGUI dialogueText;
+    public Transform dialogueContainer;
+    public GameObject dialoguePrefab;
     public ScrollRect dialogueScrollRect;
 
     [Header("Input UI")]
@@ -108,15 +110,15 @@ public class TurtlyUIManager : MonoBehaviour
     /// <summary> Add a new dialogue line to Dialogue Box </summary>
     public void AppendDialogue(string line)
     {
-        if (!dialogueText) return;
+        if (!dialogueContainer || !dialoguePrefab) return;
 
-        if (string.IsNullOrEmpty(dialogueText.text))
-            dialogueText.text = line;
-        else
-            dialogueText.text += "\n" + line;
-
+        // Create new line
+        GameObject dialogueLine = Instantiate(dialoguePrefab, dialogueContainer);
+        TextMeshProUGUI dialogueLineText = dialogueLine.GetComponent<TextMeshProUGUI>();
+        if (dialogueLineText) dialogueLineText.text = line;
+        
         // Scroll to bottom
-        LayoutRebuilder.ForceRebuildLayoutImmediate(dialogueText.rectTransform);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(dialogueContainer.GetComponent<RectTransform>());
         if (dialogueScrollRect)
         {
             Canvas.ForceUpdateCanvases();
