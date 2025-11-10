@@ -114,7 +114,7 @@ public class TurtlyUIManager : MonoBehaviour
 
         // Create new line
         GameObject dialogueLine = Instantiate(dialoguePrefab, dialogueContainer);
-        TextMeshProUGUI dialogueLineText = dialogueLine.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI dialogueLineText = dialogueLine.GetComponentInChildren<TextMeshProUGUI>();
         if (dialogueLineText) dialogueLineText.text = line;
         
         // Scroll to bottom

@@ -27,7 +27,7 @@ public class TurtlyGameManager : MonoBehaviour
         {
             uiManager.UpdateCoins(gameState.Coins);
             uiManager.SetOpeningText("Opening: placeholder");
-            uiManager.AppendDialogue("AI: placeholder");
+            uiManager.AppendDialogue("AI: Hi! Welcome to Turtly! Read the puzzle above and check the rule above!");
         }
     }
 
@@ -71,7 +71,7 @@ public class TurtlyGameManager : MonoBehaviour
         uiManager?.UpdateCoins(gameState.Coins);
 
         // TODO: placeholder
-        uiManager?.AppendDialogue("AI: placeholder");
+        uiManager?.AppendDialogue("AI: you get a hint");
 
         CheckBankrupt();
     }
@@ -138,7 +138,7 @@ public class TurtlyGameManager : MonoBehaviour
         uiManager?.AppendDialogue($"{speaker}: {text}");
 
         // TODO：这里之后接入 LLM，拿模型真正的回答
-        uiManager?.AppendDialogue("AI: placeholder");
+        uiManager?.AppendDialogue("AI: placeholder for response");
 
         CheckBankrupt();
     }
