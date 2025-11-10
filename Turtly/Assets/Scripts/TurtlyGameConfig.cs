@@ -29,5 +29,5 @@ public class TurtlyGameConfig : ScriptableObject
     
     [Header("Debug Options")]
     [Tooltip("If print Coin Amount Change in console")]
-    public bool coinChangeLog = true;
+    public bool debugLog = true;
 }
