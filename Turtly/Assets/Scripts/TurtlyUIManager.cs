@@ -157,6 +157,24 @@ public class TurtlyUIManager : MonoBehaviour
     {
         if (gameOverPanel)  gameOverPanel.SetActive(false);
     }
+    
+    public void SetInputInteractable(bool isEnabled)
+    {
+        if (questionInput != null)
+            questionInput.interactable = isEnabled;
+
+        if (askButton != null)
+            askButton.interactable = isEnabled;
+
+        if (guessButton != null)
+            guessButton.interactable = isEnabled;
+
+        if (hintButton != null)
+            hintButton.interactable = isEnabled;
+
+        if (skipButton != null)
+            skipButton.interactable = isEnabled;
+    }
 
     #endregion
 

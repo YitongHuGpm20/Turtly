@@ -1,4 +1,5 @@
 using UnityEngine;
+using Turtly;
 
 public class TurtlyGameManager : MonoBehaviour
 {
@@ -7,11 +8,14 @@ public class TurtlyGameManager : MonoBehaviour
 
     [Header("References")]
     public TurtlyUIManager uiManager;
+    public TurtlyPuzzleDatabase puzzleDatabase;
+    public TurtlyLLMBridge llmBridge;
 
     [Header("Runtime (Read Only)")]
     [SerializeField] private TurtlyGameState gameState = new TurtlyGameState();
+
+    private TurtlyPuzzle curPuzzle;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         if (!gameConfig)
@@ -20,32 +24,56 @@ public class TurtlyGameManager : MonoBehaviour
             gameConfig = ScriptableObject.CreateInstance<TurtlyGameConfig>();
         }
 
-        // Initialization
+        // 初始化金币等
         gameState.Initialize(gameConfig.initialCoins);
-        LogState("Game start");
-        if (uiManager)
-        {
-            uiManager.UpdateCoins(gameState.Coins);
-            uiManager.SetOpeningText("Opening: placeholder");
-            uiManager.AppendDialogue("AI: Hi! Welcome to Turtly! Read the puzzle above and check the rule above!");
-        }
+        uiManager?.UpdateCoins(gameState.Coins);
+
+        // 从题库加载当前题目
+        LoadCurrentPuzzle();
+
+        if (uiManager) uiManager.gameManager = this;
+
+        LogState("Game Start");
     }
 
+    private void LoadCurrentPuzzle()
+    {
+        if (puzzleDatabase == null || puzzleDatabase.Count == 0)
+        {
+            curPuzzle = null;
+            uiManager?.SetOpeningText("No puzzles in database. Please add some to TurtlyPuzzleDatabase.");
+            return;
+        }
+
+        int index = gameState.CurrentPuzzleIndex;
+        curPuzzle = puzzleDatabase.GetPuzzleByIndex(index);
+
+        // ⚠️ 这里不能写 if (!curPuzzle)，要用 == null
+        if (curPuzzle == null)
+        {
+            uiManager?.SetOpeningText($"Invalid puzzle index: {index}");
+            return;
+        }
+
+        string titlePrefix = string.IsNullOrEmpty(curPuzzle.title)
+            ? $"Puzzle {index + 1}\n"
+            : $"Puzzle {index + 1}: {curPuzzle.title}\n";
+
+        uiManager?.SetOpeningText(titlePrefix + curPuzzle.opening);
+    }
+    
     #region Gameplay Buttons
 
-    /// <summary> Ask Button: Ask a question </summary>
     public void HandleAsk(string questionText)
     {
         HandleQuestionInternal(questionText, isGuess: false);
     }
 
-    /// <summary> Guess Button: Make a guess (same logic as Ask) </summary>
     public void HandleGuess(string guessText)
     {
         HandleQuestionInternal(guessText, isGuess: true);
     }
 
-    /// <summary> Hint Button: Get a hint </summary>
     public void HandleHint()
     {
         if (gameState.IsBankrupt)
@@ -70,13 +98,12 @@ public class TurtlyGameManager : MonoBehaviour
         gameState.AddHintUse();
         uiManager?.UpdateCoins(gameState.Coins);
 
-        // TODO: placeholder
+        // TODO: 现在还没接题库的 hint，这里先占位
         uiManager?.AppendDialogue("AI: you get a hint");
 
         CheckBankrupt();
     }
 
-    /// <summary> Skip Button: Skip current puzzle and get a new one </summary>
     public void HandleSkip()
     {
         if (gameState.IsBankrupt)
@@ -92,13 +119,17 @@ public class TurtlyGameManager : MonoBehaviour
         }
 
         gameState.SpendCoins(gameConfig.skipCost);
-        gameState.NextPuzzle();
         uiManager?.UpdateCoins(gameState.Coins);
 
-        uiManager?.AppendDialogue("System: You skipped the puzzle");
-        // TODO：placeholder
-        uiManager?.SetOpeningText($"Opening: This is No. {gameState.CurrentPuzzleIndex + 1}  puzzle");
+        uiManager?.AppendDialogue("System: You skipped this puzzle.");
 
+        gameState.NextPuzzle();
+        gameState.ResetHints();
+
+        uiManager?.ClearDialogue();
+        LoadCurrentPuzzle();
+
+        LogState("Skip puzzle");
         CheckBankrupt();
     }
 
@@ -110,16 +141,14 @@ public class TurtlyGameManager : MonoBehaviour
             gameConfig = ScriptableObject.CreateInstance<TurtlyGameConfig>();
         }
 
-        // Reset Game State
         gameState.Initialize(gameConfig.initialCoins);
 
-        // Reset UI
         if (uiManager)
         {
-            uiManager.ClearDialogue(); 
+            uiManager.ClearDialogue();
             uiManager.UpdateCoins(gameState.Coins);
-            uiManager.SetOpeningText("Opening: This is No. 1 puzzle"); 
-            uiManager.HideGameOver(); 
+            LoadCurrentPuzzle();             // 用题库重新设置开场
+            uiManager.HideGameOver();
             uiManager.AppendDialogue("System: Game restarted!");
         }
 
@@ -130,51 +159,73 @@ public class TurtlyGameManager : MonoBehaviour
 
     #region Internal Logics
 
-    /// <summary>
-    /// Ask / Guess Buttons
-    /// </summary>
-    private void HandleQuestionInternal(string text, bool isGuess)
+    private async void HandleQuestionInternal(string text, bool isGuess)
     {
         if (gameState.IsBankrupt)
         {
-            uiManager?.AppendDialogue("System: No enough coin to ask or guess");
+            uiManager?.AppendDialogue("System: You are bankrupt, cannot ask or guess.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(text))
         {
-            uiManager?.AppendDialogue("System: You need to type something");
+            uiManager?.AppendDialogue("System: Please type something.");
             return;
         }
 
         if (gameState.Coins < gameConfig.askCost)
         {
-            uiManager?.AppendDialogue("System: No enough coin to ask or guess");
+            uiManager?.AppendDialogue("System: Not enough coins to ask or guess.");
             return;
         }
 
-        // Spend coins
+        if (curPuzzle == null)
+        {
+            uiManager?.AppendDialogue("System: No puzzle loaded.");
+            return;
+        }
+
         gameState.SpendCoins(gameConfig.askCost);
         uiManager?.UpdateCoins(gameState.Coins);
 
-        // Display user input
         string speaker = isGuess ? "You (Guess)" : "You";
         uiManager?.AppendDialogue($"{speaker}: {text}");
 
-        // TODO：这里之后接入 LLM，拿模型真正的回答
-        uiManager?.AppendDialogue("AI: placeholder for response");
+        uiManager?.AppendDialogue("AI: Thinking...");
+        uiManager?.SetInputInteractable(false);
+
+        if (llmBridge != null)
+        {
+            string aiReply = null;
+            bool done = false;
+
+            llmBridge.AskOnce(curPuzzle, text, isGuess, reply =>
+            {
+                aiReply = reply;
+                done = true;
+            });
+
+            while (!done)
+            {
+                await System.Threading.Tasks.Task.Yield();
+            }
+
+            uiManager?.AppendDialogue("AI: " + aiReply);
+        }
+        else
+        {
+            uiManager?.AppendDialogue("AI: (LLM not connected, using placeholder answer.)");
+        }
+
+        uiManager?.SetInputInteractable(true);
 
         CheckBankrupt();
     }
 
-    /// <summary>
-    /// When player solved the puzzle
-    /// </summary>
     public void HandlePuzzleSolved()
     {
         gameState.MarkPuzzleSolved();
 
-        // Calculate rewards
         int bonusFromCoins = Mathf.RoundToInt(gameState.Coins * gameConfig.rewardPerCoinLeftRatio);
         int reward = Mathf.Clamp(gameConfig.rewardBase + bonusFromCoins, gameConfig.minReward, gameConfig.maxReward);
 
@@ -184,26 +235,25 @@ public class TurtlyGameManager : MonoBehaviour
         uiManager?.AppendDialogue($"System: Congrats! You solved the puzzle and won {reward} coins");
         uiManager?.AppendDialogue($"System: Currently solved {gameState.PuzzlesSolved} puzzles");
 
-        // Start a new puzzle
         gameState.NextPuzzle();
         uiManager?.SetOpeningText($"Opening: This is No. {gameState.CurrentPuzzleIndex + 1}  puzzle");
 
         LogState("Puzzle solved");
     }
 
-    /// <summary> Check if bankrupt </summary>
     private void CheckBankrupt()
     {
-        if (!gameState.IsBankrupt) return;
-
-        uiManager?.AppendDialogue("System: You run out of coins, GAME OVER");
-        uiManager?.ShowGameOver(gameState.PuzzlesSolved);
-        LogState("Game over");
+        if (gameState.Coins <= 0)
+        {
+            uiManager?.AppendDialogue("System: You are bankrupt. Game over.");
+            uiManager?.ShowGameOver(gameState.PuzzlesSolved);
+            LogState("Game over");
+        }
     }
 
     private void LogState(string tag)
     {
-        if (gameConfig != null && !gameConfig.debugLog) return;
+        if (gameConfig && !gameConfig.debugLog) return;
 
         Debug.Log($"[TurtlyGameManager] {tag}");
         gameState.DebugPrint();

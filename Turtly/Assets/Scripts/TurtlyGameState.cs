@@ -69,6 +69,11 @@ public class TurtlyGameState
         hintsUsed++;
     }
 
+    public void ResetHints()
+    {
+        hintsUsed = 0;
+    }
+
     /// <summary> Print Current State </summary>
     public void DebugPrint()
     {

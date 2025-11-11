@@ -37,7 +37,7 @@ MonoBehaviour:
     - It was raining heavily that day.
     - The wife and her twin look identical.
     difficulty: 4
-  - id: P001
+  - id: P002
     title: Red, Green, and White
     opening: "They looked perfect together, and he seemed happy\u2014but \u201Cgreen
       turned red into white.\u201D A fallen ring, a threatening proof, and the blurred
@@ -56,3 +56,72 @@ MonoBehaviour:
     - The colors red, green, and white symbolize wedding, jealousy, and death.
     - "The \u201Chusband\u201D being away for long trips is key."
     difficulty: 4
+  - id: P003
+    title: Waterweed
+    opening: A boy walked by the river and chatted with a fisherman. The fisherman
+      said something to him, and the boy immediately committed suicide.
+    answer: "Years earlier, the boy and his girlfriend played by this river. She
+      fell into the water, and he jumped in to save her. The current was strong;
+      he managed to grab a handful of \u201Cwaterweed\u201D but failed to pull her
+      up. She drowned. Years later, he returned to the same river and chatted with
+      a fisherman, who casually said, \u201CThere\u2019s never been any waterweed
+      in this river.\u201D The boy realized what he had grabbed that day was her
+      hair\u2014and he killed himself in grief."
+    hints:
+    - "The \u201Cwaterweed\u201D wasn\u2019t waterweed."
+    - Something the fisherman said triggered the realization.
+    - It happened in the same river years later.
+    difficulty: 3
+  - id: P004
+    title: The Loyal Dog
+    opening: "Xiao Qiang owned a very loyal dog. One day he took the dog out for
+      a walk\u2014and died."
+    answer: 'Xiao Qiang had a heart condition. That day he had a sudden cardiac arrest
+      on the street. His loyal dog kept strangers from approaching, barking and guarding
+      his owner, so no one dared to help. By the time help arrived, Xiao Qiang was
+      dead.
+
+      (Alternate twist: his wife secretly removed his medication to
+      claim insurance money.)'
+    hints:
+    - "The dog didn\u2019t attack him\u2014it tried to protect him."
+    - The tragedy was caused by misplaced loyalty.
+    difficulty: 2
+  - id: P005
+    title: "Don\u2019t Save Him!"
+    opening: "When we arrived at the house of the food-poisoning victims, everyone
+      was too weak to stand, faces pale as paper. Just as we were about to carry
+      the most critical elder onto the ambulance, they all cried out in unison: \u201CDon\u2019t
+      save him!\u201D"
+    answer: The old man had already died earlier. The family had gathered for his
+      funeral, but the food they prepared caused mass food poisoning. The paramedics
+      thought the old man was another unconscious victim, but the family shouted
+      not to waste time on a corpse.
+    hints:
+    - "The old man wasn\u2019t one of the poisoned victims."
+    - The family gathered because of a funeral, not a meal.
+    difficulty: 2
+  - id: P006
+    title: Chocolate
+    opening: "Xiao Ming\u2019s little brother kept a pet hamster. One day, the hamster
+      died, and the boy was heartbroken. Their mother rewarded him with a piece of
+      chocolate the size of the hamster. Some time later, Xiao Ming died. Why?"
+    answer: "The little brother wanted a bigger piece of chocolate\u2014so he killed
+      his brother to get one the same size as Xiao Ming."
+    hints:
+    - "The chocolate\u2019s size is always \u201Cthe same as what died.\u201D"
+    - "The brother\u2019s logic was literal and cruel."
+    difficulty: 3
+  - id: P007
+    title: The Fifth Man
+    opening: Five men were walking along a country road when it began to rain. Four
+      of them quickened their pace, but the fifth remained unhurried. Eventually,
+      all five arrived at the destination together. The four were drenched, but the
+      fifth was completely dry.
+    answer: The four men were pallbearers carrying a coffin. The fifth man was the
+      corpse inside.
+    hints:
+    - "The fifth person isn\u2019t walking on his own."
+    - "\u201CDestination\u201D means something final."
+    - The rain affected only the living.
+    difficulty: 2
