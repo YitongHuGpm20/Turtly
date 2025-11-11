@@ -55,9 +55,10 @@ public class TurtlyGameManager : MonoBehaviour
             return;
         }
 
-        string titlePrefix = string.IsNullOrEmpty(curPuzzle.title)
-            ? $"Puzzle {index + 1}\n"
-            : $"Puzzle {index + 1}: {curPuzzle.title}\n";
+        string titlePrefix = $"Puzzle {index + 1}";
+        //string titlePrefix = string.IsNullOrEmpty(curPuzzle.title)
+            //? $"Puzzle {index + 1}\n"
+            //: $"Puzzle {index + 1}: {curPuzzle.title}\n";
 
         uiManager?.SetOpeningText(titlePrefix + curPuzzle.opening);
     }

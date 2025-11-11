@@ -1300,7 +1300,7 @@ MonoBehaviour:
   parallelPrompts: -1
   dontDestroyOnLoad: 1
   contextSize: 8192
-  batchSize: 512
+  batchSize: 64
   model: DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf
   chatTemplate: chatml
   lora: 
@@ -1497,6 +1497,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameConfig: {fileID: 0}
   uiManager: {fileID: 1213215514}
+  puzzleDatabase: {fileID: 11400000, guid: 2f33eb7fef0fb074185bbc596398ffd1, type: 2}
+  llmBridge: {fileID: 824106980}
   gameState:
     coins: 0
     currentPuzzleIndex: 0
@@ -1945,6 +1947,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338fb3fc3556dda49af2fb7aeb5cab7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  llmChar: {fileID: 2141297877}
+  systemPrompt: 'You are the referee for a ''Turtle Soup'' lateral thinking puzzle.
+    You know the full hidden true story (solution), but you must NEVER reveal, quote,
+    or describe it. Your ONLY job is to judge the player''s statements.
+
+
+    For
+    a QUESTION about the situation, you must decide if the statement is true, false,
+    or impossible to tell from the hidden story. For a GUESS about the solution,
+    you must decide if it is exactly correct, close but not exact, or wrong.
+
+
+    FIRST,
+    think step by step inside <think>...</think> tags. Then, on a new line, output
+    exactly ONE WORD only:
+
+    - For a QUESTION: ''yes'', ''no'', or ''irrelevant''.
+
+    -
+    For a GUESS: ''correct'', ''close'', or ''wrong''.
+
+    Output nothing else after
+    that one word. Do not restate the puzzle or the solution. Never apologize, never
+    say you cannot answer.'
 --- !u!4 &824106981
 Transform:
   m_ObjectHideFlags: 0
@@ -3802,7 +3828,7 @@ RectTransform:
   m_Father: {fileID: 2033874458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.2}
-  m_AnchorMax: {x: 1, y: 0.8}
+  m_AnchorMax: {x: 1, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3957,7 +3983,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 200}
+  m_SizeDelta: {x: 800, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1950250174
 MonoBehaviour:
@@ -4976,7 +5002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6c87a428fd5d0be9bbc686bdc8c3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  advancedOptions: 0
+  advancedOptions: 1
   remote: 0
   _llm: {fileID: 513407121}
   APIKey: 
@@ -5010,19 +5036,10 @@ MonoBehaviour:
   ignoreEos: 0
   nKeep: -1
   stop: []
-  stream: 1
+  stream: 0
   playerName: Player
-  AIName: Turtly
-  prompt: 'You are a game master hosting a "Turtle Soup" lateral thinking puzzle
-    marathon.
-
-    You only answer by giving hints or asking back clarifying questions.
-
-    Do
-    not directly reveal the final answer unless the player already guessed it.
-
-    Answer
-    concisely.'
+  AIName: Host
+  prompt: You are a helpful assistant.
   setNKeepToPrompt: 1
   chat: []
   grammarString: 
