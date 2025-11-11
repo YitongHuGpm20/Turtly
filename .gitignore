@@ -1,3 +1,4 @@
+# ==== Unity Default ====
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -7,7 +8,7 @@
 UserSettings/
 MemoryCaptures/
 
-# VS / Rider / IDE
+# ==== VS / Rider / IDE ====
 *.csproj
 *.sln
 *.user
@@ -15,6 +16,17 @@ MemoryCaptures/
 .vs/
 .idea/
 
-# OS
+# ==== OS ====
 .DS_Store
 Thumbs.db
+
+# ==== LLM For Unity ====
+*.gguf
+*.bin
+*.model
+*.pt
+*.onnx
+*.safetensors
+Assets/UndreamAI/LLMUnity/Models/
+Assets/UndreamAI/LLMUnity/DownloadedModels/
+Assets/UndreamAI/LLMUnity/Resources/Models/
