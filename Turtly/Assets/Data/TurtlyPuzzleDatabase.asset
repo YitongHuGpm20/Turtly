@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad2b702ad1d57a4380f0525aa93108c, type: 3}
+  m_Name: TurtlyPuzzleDatabase
+  m_EditorClassIdentifier: 
+  puzzles:
+  - id: P001
+    title: Indistinguishable Sisters
+    opening: "On a rainy day, a man went out dragging a large suitcase. At the door,
+      he ran into his wife and happily exchanged a few words with her\u2014then his
+      face suddenly twisted in horror. He looked carefully at her side profile, then
+      at his watch, and finally glanced at the pouring rain outside. In panic, he
+      dragged the suitcase and left the house, never to be seen again."
+    answer: "The woman has an identical twin sister. The man was secretly having
+      an affair with the sister. During their trysts, the sister drew a mole on her
+      cheek to distinguish herself from the wife. Recently, the husband had grown
+      tired of his wife and planned to murder her. One rainy day, thinking his wife
+      was at work, he invited the sister over. Seeing the woman sitting on the sofa
+      without a mole, he panicked\u2014believing his wife had come home early. Fearing
+      exposure, he killed her, dismembered the body, and packed it in a suitcase.
+      When he left home, he met a woman outside\u2014at first thinking it was his
+      lover. After chatting happily for a moment, he noticed she also had no mole.
+      Checking the time, he realized it was when his wife usually returned from work.
+      Then it dawned on him: the woman he had killed inside was actually his lover\u2014the
+      mole had been washed away by the rain. Terrified, he fled and disappeared forever."
+    hints:
+    - The key lies in the mole.
+    - It was raining heavily that day.
+    - The wife and her twin look identical.
+    difficulty: 4
+  - id: P001
+    title: Red, Green, and White
+    opening: "They looked perfect together, and he seemed happy\u2014but \u201Cgreen
+      turned red into white.\u201D A fallen ring, a threatening proof, and the blurred
+      remains became his obsession."
+    answer: "A senior student had a girlfriend, and they looked perfect together.
+      One day he bought a ring to propose (red \u2014 for marriage). On that day,
+      a man attacked him, and the ring fell to the ground. Only then did he discover
+      the girl was married to that man, an abusive husband. Her coworkers and parents
+      all knew the truth but hid it, believing the student gave her hope. She became
+      pregnant, and when the husband\u2014a long-distance truck driver\u2014realized
+      the timeline didn\u2019t match, he knew he\u2019d been cheated on (green \u2014
+      jealousy). The husband later extorted the student, even using the aborted fetus
+      as \u201Cproof.\u201D The harassment never stopped, and one day while escaping
+      the man, the student was hit by a car and died (white \u2014 funeral)."
+    hints:
+    - The colors red, green, and white symbolize wedding, jealousy, and death.
+    - "The \u201Chusband\u201D being away for long trips is key."
+    difficulty: 4
