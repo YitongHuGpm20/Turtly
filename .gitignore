@@ -30,6 +30,4 @@ Thumbs.db
 Assets/UndreamAI/LLMUnity/Models/
 Assets/UndreamAI/LLMUnity/DownloadedModels/
 Assets/UndreamAI/LLMUnity/Resources/Models/
-Assets/StreamingAssets/undreamai*/**/*.dll
-Assets/StreamingAssets/undreamai*/**/*.so
-Assets/StreamingAssets/undreamai*/**/*.dylib
+Assets/StreamingAssets/
