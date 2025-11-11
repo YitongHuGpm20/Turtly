@@ -27,7 +27,7 @@ Thumbs.db
 *.pt
 *.onnx
 *.safetensors
-Assets/UndreamAI/LLMUnity/Models/
-Assets/UndreamAI/LLMUnity/DownloadedModels/
-Assets/UndreamAI/LLMUnity/Resources/Models/
-Assets/StreamingAssets/
+Turtly/Assets/UndreamAI/LLMUnity/Models/
+Turtly/Assets/UndreamAI/LLMUnity/DownloadedModels/
+Turtly/Assets/UndreamAI/LLMUnity/Resources/Models/
+Turtly/Assets/StreamingAssets/
