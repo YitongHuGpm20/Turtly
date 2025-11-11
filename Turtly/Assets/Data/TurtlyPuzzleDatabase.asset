@@ -21,6 +21,37 @@ MonoBehaviour:
       fifth was completely dry.
     answer: The four men were pallbearers carrying a coffin. The fifth man was the
       corpse inside.
+    facts:
+    - There are five men in total.
+    - Four men are walking outside in the rain.
+    - One man (the fifth) is not walking by himself.
+    - The four men are pallbearers.
+    - The pallbearers are carrying a coffin.
+    - The fifth man is the corpse inside the coffin.
+    - The corpse is dead.
+    - The corpse is not moving by his own power.
+    - The coffin has a cover or lid.
+    - The coffin protects the corpse from getting wet.
+    - It is raining during the walk.
+    - The four pallbearers are exposed to the rain.
+    - The four pallbearers become drenched.
+    - The fifth man (corpse) remains completely dry.
+    - All five men reach the same destination at the same time.
+    - The fifth man does not walk faster or slower; he is carried.
+    - The four men quicken their pace because of the rain.
+    - "The fifth man\u2019s pace does not change, because he cannot move."
+    - "The corpse\u2019s journey ends at the same place as the pallbearers\u2019."
+    - The destination is the same for both the living men and the corpse.
+    - The fifth man is not alive.
+    - The four men are alive.
+    - The fifth man does not feel the rain.
+    - The fifth man does not carry anything.
+    - The fifth man is inside the coffin during the entire journey.
+    - The coffin is being carried along the country road.
+    - The coffin shields the corpse from the weather.
+    - The four pallbearers hold the coffin together.
+    - "The corpse\u2019s presence causes there to be five \u201Cmen\u201D total."
+    - The rain affects only the men outside the coffin.
     hints:
     - "The fifth person isn\u2019t walking on his own."
     - "\u201CDestination\u201D means something final."
@@ -45,6 +76,7 @@ MonoBehaviour:
       Checking the time, he realized it was when his wife usually returned from work.
       Then it dawned on him: the woman he had killed inside was actually his lover\u2014the
       mole had been washed away by the rain. Terrified, he fled and disappeared forever."
+    facts: []
     hints:
     - The key lies in the mole.
     - It was raining heavily that day.
@@ -65,6 +97,7 @@ MonoBehaviour:
       jealousy). The husband later extorted the student, even using the aborted fetus
       as \u201Cproof.\u201D The harassment never stopped, and one day while escaping
       the man, the student was hit by a car and died (white \u2014 funeral)."
+    facts: []
     hints:
     - The colors red, green, and white symbolize wedding, jealousy, and death.
     - "The \u201Chusband\u201D being away for long trips is key."
@@ -80,6 +113,7 @@ MonoBehaviour:
       a fisherman, who casually said, \u201CThere\u2019s never been any waterweed
       in this river.\u201D The boy realized what he had grabbed that day was her
       hair\u2014and he killed himself in grief."
+    facts: []
     hints:
     - "The \u201Cwaterweed\u201D wasn\u2019t waterweed."
     - Something the fisherman said triggered the realization.
@@ -96,6 +130,7 @@ MonoBehaviour:
 
       (Alternate twist: his wife secretly removed his medication to
       claim insurance money.)'
+    facts: []
     hints:
     - "The dog didn\u2019t attack him\u2014it tried to protect him."
     - The tragedy was caused by misplaced loyalty.
@@ -110,6 +145,7 @@ MonoBehaviour:
       funeral, but the food they prepared caused mass food poisoning. The paramedics
       thought the old man was another unconscious victim, but the family shouted
       not to waste time on a corpse.
+    facts: []
     hints:
     - "The old man wasn\u2019t one of the poisoned victims."
     - The family gathered because of a funeral, not a meal.
@@ -121,6 +157,7 @@ MonoBehaviour:
       chocolate the size of the hamster. Some time later, Xiao Ming died. Why?"
     answer: "The little brother wanted a bigger piece of chocolate\u2014so he killed
       his brother to get one the same size as Xiao Ming."
+    facts: []
     hints:
     - "The chocolate\u2019s size is always \u201Cthe same as what died.\u201D"
     - "The brother\u2019s logic was literal and cruel."

@@ -15,6 +15,9 @@ namespace Turtly
         [TextArea(3, 10)]
         public string answer;
 
+        [TextArea(1, 3)] 
+        public string[] facts;
+
         [TextArea(1, 3)]
         public string[] hints;
 

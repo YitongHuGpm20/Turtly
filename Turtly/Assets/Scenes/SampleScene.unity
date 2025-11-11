@@ -1948,29 +1948,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   llmChar: {fileID: 2141297877}
-  systemPrompt: 'You are the referee for a ''Turtle Soup'' lateral thinking puzzle.
-    You know the full hidden true story (solution), but you must NEVER reveal, quote,
-    or describe it. Your ONLY job is to judge the player''s statements.
+  shortInstruction: You are a referee for a 'Turtle Soup' lateral thinking puzzle.
+    Use the FACTS provided to judge the player's statements. Output ONLY the final
+    label inside <ANSWER>...</ANSWER>.
+  extraInstruction: 'GENERAL RULES:
+
+    - Treat each line in FACTS as absolutely
+    true.
+
+    - Base judgment ONLY on FACTS. Do not invent facts.
+
+    - Do NOT
+    reveal, quote, or describe the hidden solution.
+
+    - Do not repeat the puzzle
+    text or the player''s question.
 
 
-    For
-    a QUESTION about the situation, you must decide if the statement is true, false,
-    or impossible to tell from the hidden story. For a GUESS about the solution,
-    you must decide if it is exactly correct, close but not exact, or wrong.
+    OUTPUT RULE:
 
+    - For QUESTIONS: output
+    exactly one of {yes, no, irrelevant}.
 
-    FIRST,
-    think step by step inside <think>...</think> tags. Then, on a new line, output
-    exactly ONE WORD only:
+    - For GUESSES: output exactly one
+    of {correct, close, wrong}.
 
-    - For a QUESTION: ''yes'', ''no'', or ''irrelevant''.
+    - Place the label between <ANSWER> and </ANSWER>
+    with nothing else outside those tags.
 
-    -
-    For a GUESS: ''correct'', ''close'', or ''wrong''.
-
-    Output nothing else after
-    that one word. Do not restate the puzzle or the solution. Never apologize, never
-    say you cannot answer.'
+    You may optionally include internal
+    reasoning inside <think>...</think>, but the ONLY visible output must be <ANSWER>...</ANSWER>.'
 --- !u!4 &824106981
 Transform:
   m_ObjectHideFlags: 0
@@ -5018,7 +5025,7 @@ MonoBehaviour:
   grammarJSON: 
   cachePrompt: 1
   seed: 0
-  temperature: 0.2
+  temperature: 0.5
   topK: 40
   topP: 0.9
   minP: 0.05
